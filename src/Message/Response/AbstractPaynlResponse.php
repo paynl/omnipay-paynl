@@ -18,7 +18,12 @@ abstract class AbstractPaynlResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        return isset($this->data['request']['result']) && $this->data['request']['result'] == 1;
+        if($this->data['request']['result'] == 1){
+            if($this->data['paymentDetails']['state'] == 100){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
